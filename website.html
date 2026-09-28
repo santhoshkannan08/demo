@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>DreamSpace Website</title>
+
+  <style>
+    /* =========================
+       BASIC SETTINGS
+    ========================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #080812;
+      color: white;
+      transition: 0.4s;
+    }
+
+    body.light {
+      background: #f5f5ff;
+      color: #111;
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================== */
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 20px 8%;
+
+      background: rgba(10, 10, 25, 0.75);
+      backdrop-filter: blur(15px);
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+      color: #8f5cff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #9b6cff;
+    }
+
+    .theme-btn {
+      border: none;
+      background: #8f5cff;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+
+    /* =========================
+       HERO SECTION
+    ========================== */
+
+    .hero {
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      padding: 100px 20px;
+
+      position: relative;
+      overflow: hidden;
+
+      background:
+        radial-gradient(circle at 20% 30%, #5c2cff55, transparent 30%),
+        radial-gradient(circle at 80% 70%, #ff2ca855, transparent 30%);
+    }
+
+    .hero-content {
+      max-width: 800px;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: clamp(45px, 8vw, 90px);
+      margin-bottom: 20px;
+
+      background: linear-gradient(
+        90deg,
+        #8f5cff,
+        #ff4ecd,
+        #4ddcff
+      );
+
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: #bbb;
+      line-height: 1.7;
+      margin-bottom: 35px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+
+      background: linear-gradient(
+        90deg,
+        #7045ff,
+        #e83cff
+      );
+
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+
+      box-shadow: 0 0 25px #9b5cff77;
+
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 0 40px #c35cffaa;
+    }
+
+
+    /* =========================
+       FLOATING CIRCLES
+    ========================== */
+
+    .circle {
+      position: absolute;
+
+      width: 100px;
+      height: 100px;
+
+      border-radius: 50%;
+
+      background: linear-gradient(
+        135deg,
+        #8f5cff,
+        #ff3cac
+      );
+
+      filter: blur(5px);
+      opacity: 0.5;
+
+      animation: float 6s infinite ease-in-out;
+    }
+
+    .circle:nth-child(1) {
+      left: 10%;
+      top: 20%;
+    }
+
+    .circle:nth-child(2) {
+      right: 10%;
+      bottom: 20%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 2s;
+    }
+
+    .circle:nth-child(3) {
+      right: 35%;
+      top: 15%;
+      width: 50px;
+      height: 50px;
+      animation-delay: 1s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-40px);
+      }
+    }
+
+
+    /* =========================
+       ABOUT
+    ========================== */
+
+    section {
+      padding: 100px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 45px;
+      margin-bottom: 50px;
+    }
+
+    .about {
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .about p {
+      color: #aaa;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+
+    /* =========================
+       CARDS
+    ========================== */
+
+    .cards {
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(230px, 1fr));
+
+      gap: 25px;
+    }
+
+    .card {
+      padding: 35px;
+
+      border-radius: 20px;
+
+      background: rgba(255, 255, 255, 0.06);
+
+      border: 1px solid rgba(255, 255, 255, 0.1);
+
+      backdrop-filter: blur(10px);
+
+      transition: 0.4s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+
+      border-color: #9b5cff;
+
+      box-shadow:
+        0 15px 40px #7c4dff33;
+    }
+
+    .card .icon {
+      font-size: 45px;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      margin-bottom: 15px;
+      font-size: 23px;
+    }
+
+    .card p {
+      color: #aaa;
+      line-height: 1.6;
+    }
+
+
+    /* =========================
+       CONTACT
+    ========================== */
+
+    .contact {
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .contact input,
+    .contact textarea {
+      width: 100%;
+
+      padding: 15px;
+      margin: 10px 0;
+
+      border: none;
+      outline: none;
+
+      border-radius: 10px;
+
+      background: #171725;
+      color: white;
+    }
+
+    .contact textarea {
+      height: 150px;
+      resize: none;
+    }
+
+    .contact button {
+      margin-top: 15px;
+
+      border: none;
+      padding: 15px 35px;
+
+      border-radius: 30px;
+
+      background: linear-gradient(
+        90deg,
+        #7045ff,
+        #e83cff
+      );
+
+      color: white;
+      font-size: 16px;
+
+      cursor: pointer;
+
+      transition: 0.3s;
+    }
+
+    .contact button:hover {
+      transform: scale(1.05);
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #777;
+      border-top: 1px solid #222;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 700px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      nav {
+        padding: 18px 5%;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+
+      section {
+        padding: 70px 5%;
+      }
+
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <!-- =========================
+       NAVIGATION
+  ========================== -->
+
+  <nav>
+
+    <div class="logo">
+      DreamSpace ✨
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <button class="theme-btn" onclick="toggleTheme()">
+      🌙
+    </button>
+
+  </nav>
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="hero" id="home">
+
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+
+    <div class="hero-content">
+
+      <h1>
+        Create Something Amazing
+      </h1>
+
+      <p>
+        Welcome to DreamSpace — a modern website built
+        with HTML, CSS and JavaScript.
+        Explore beautiful designs and bring your ideas to life.
+      </p>
+
+      <a href="#services" class="btn">
+        Explore More →
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ABOUT
+  ========================== -->
+
+  <section id="about">
+
+    <h2 class="section-title">
+      About Us
+    </h2>
+
+    <div class="about">
+
+      <p>
+        We create beautiful, modern and interactive
+        web experiences. This website demonstrates
+        what you can build using simple HTML,
+        CSS animations and JavaScript.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       SERVICES
+  ========================== -->
+
+  <section id="services">
+
+    <h2 class="section-title">
+      Our Services
+    </h2>
+
+    <div class="cards">
+
+      <div class="card">
+
+        <div class="icon">
+          🎨
+        </div>
+
+        <h3>
+          Web Design
+        </h3>
+
+        <p>
+          Beautiful and modern designs that look
+          amazing on phones, tablets and computers.
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="icon">
+          💻
+        </div>
+
+        <h3>
+          Development
+        </h3>
+
+        <p>
+          Fast and interactive websites powered
+          by HTML, CSS and JavaScript.
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="icon">
+          🚀
+        </div>
+
+        <h3>
+          Performance
+        </h3>
+
+        <p>
+          Lightweight websites designed to load
+          quickly and provide a smooth experience.
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="icon">
+          ✨
+        </div>
+
+        <h3>
+          Animation
+        </h3>
+
+        <p>
+          Eye-catching animations and effects that
+          make your website feel alive.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       CONTACT
+  ========================== -->
+
+  <section id="contact">
+
+    <h2 class="section-title">
+      Contact Us
+    </h2>
+
+    <div class="contact">
+
+      <input
+        type="text"
+        id="name"
+        placeholder="Your Name"
+      >
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Your Email"
+      >
+
+      <textarea
+        id="message"
+        placeholder="Your Message"
+      ></textarea>
+
+      <button onclick="sendMessage()">
+        Send Message 🚀
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <p>
+      © 2026 DreamSpace. Made with ❤️
+    </p>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    // Dark / Light Mode
+    function toggleTheme() {
+
+      document.body.classList.toggle("light");
+
+      const button = document.querySelector(".theme-btn");
+
+      if (document.body.classList.contains("light")) {
+        button.innerHTML = "☀️";
+      } else {
+        button.innerHTML = "🌙";
+      }
+
+    }
+
+
+    // Contact Form
+    function sendMessage() {
+
+      const name =
+        document.getElementById("name").value;
+
+      const email =
+        document.getElementById("email").value;
+
+      const message =
+        document.getElementById("message").value;
+
+
+      if (
+        name === "" ||
+        email === "" ||
+        message === ""
+      ) {
+
+        alert("Please fill in all fields!");
+
+        return;
+      }
+
+
+      alert(
+        "Thank you, " +
+        name +
+        "! Your message has been received ❤️"
+      );
+
+
+      // Clear form
+      document.getElementById("name").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("message").value = "";
+
+    }
+
+  </script>
+
+</body>
+</html>
